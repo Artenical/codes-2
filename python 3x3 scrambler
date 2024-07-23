@@ -1,0 +1,48 @@
+ import random
+
+# List of possible moves with their descriptions
+moves = {
+    "U": "Turn the Upper face clockwise",
+    "U'": "Turn the Upper face counterclockwise",
+    "U2": "Turn the Upper face 180 degrees",
+    "R": "Turn the Right face clockwise",
+    "R'": "Turn the Right face counterclockwise",
+    "R2": "Turn the Right face 180 degrees",
+    "F": "Turn the Front face clockwise",
+    "F'": "Turn the Front face counterclockwise",
+    "F2": "Turn the Front face 180 degrees",
+    "D": "Turn the Down face clockwise",
+    "D'": "Turn the Down face counterclockwise",
+    "D2": "Turn the Down face 180 degrees",
+    "L": "Turn the Left face clockwise",
+    "L'": "Turn the Left face counterclockwise",
+    "L2": "Turn the Left face 180 degrees",
+    "B": "Turn the Back face clockwise",
+    "B'": "Turn the Back face counterclockwise",
+    "B2": "Turn the Back face 180 degrees"
+}
+
+def generate_scramble(length=20):
+    scramble = []
+    last_move = ""
+
+    for _ in range(length):
+        move = random.choice(list(moves.keys()))
+        # Avoid consecutive moves of the same face (e.g., U U or U U')
+        while move[0] == last_move:
+            move = random.choice(list(moves.keys()))
+        scramble.append(move)
+        last_move = move[0]
+
+    return scramble
+
+def print_scramble(scramble):
+    print("Scramble:")
+    for move in scramble:
+        print(f"{move}: {moves[move]}")
+
+if __name__ == "__main__":
+    scramble = generate_scramble()
+    print_scramble(scramble)
+
+    print("Remember to start with green in front and white on top whike you scramble")
